@@ -5,13 +5,17 @@ const POSTS = 'posts/'
 const CATEGORIES = 'categories/'
 const USERS = 'users/'
 const TOKEN = 'token'
-const ADD_POST = 'admin/create/'
-const EDIT_POST = 'admin/edit/'
-const DELETE_POST = 'admin/delete/'
-const GET_POST_TO_EDIT = 'admin/edit/postdetail/'
+const ADMIN = 'admin'
+const ADD_POST = `${ADMIN}/create/`
+const EDIT_POST = `${ADMIN}/edit/`
+const DELETE_POST = `${ADMIN}/delete/`
+const GET_POST_TO_EDIT = `${ADMIN}/edit/postdetail/`
+const TOKEN_TO_BLAKLIST = `${USERS}logout/blacklist`
 
 export const token = localStorage.getItem('access_token')
 
+
+//gets token from LS and returns user informations
 export const parseJwt = (token) => {
     if (token !== undefined) {
         let base64Url = token?.split('.')[1];
@@ -29,6 +33,7 @@ export const axiosInstance = axios.create({
     validateStatus: () => true,
     headers: { Authorization: localStorage.getItem('access_token') ? 'JWT ' + localStorage.getItem('access_token') : null, 'Content-Type': 'application/json', accept: 'application/json', },
 })
+
 axiosInstance.interceptors.response.use(
     (response) => { return response },
     async (error) => {
@@ -111,4 +116,8 @@ export const getPostById = (id) => {
 
 export const deletePost = (id) => {
     return axiosInstance.delete(`${DELETE_POST}${id}/`)
+}
+
+export const addTokenToBlacklist = (refresh_token) => {
+    return axiosInstance.post(TOKEN_TO_BLAKLIST, refresh_token)
 }
