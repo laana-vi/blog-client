@@ -10,12 +10,14 @@ const ADD_POST = `${ADMIN}/create/`
 const EDIT_POST = `${ADMIN}/edit/`
 const DELETE_POST = `${ADMIN}/delete/`
 const GET_POST_TO_EDIT = `${ADMIN}/edit/postdetail/`
-const TOKEN_TO_BLAKLIST = `${USERS}logout/blacklist`
+const GET_USER_DETAIL = `${USERS}user/edit/userdetail/`
+const EDIT_USER = `${USERS}user/edit/`
+const DELETE_USER = `${USERS}user/delete/`
+const PASSWORD_RESET = 'password_reset/'
+const PASSWORD_RESET_CONFIRM = 'password_reset/confirm/'
 
 export const token = localStorage.getItem('access_token')
 
-
-//gets token from LS and returns user informations
 export const parseJwt = (token) => {
     if (token !== undefined) {
         let base64Url = token?.split('.')[1];
@@ -28,53 +30,20 @@ export const parseJwt = (token) => {
     else return undefined
 }
 
+export const isValidToken = () => {
+    const expTime = parseJwt(token)?.exp
+    const timeNow = Math.ceil(new Date() / 1000)
+    return timeNow > expTime && localStorage.removeItem('access_token')
+}
+
+isValidToken()
+
 export const axiosInstance = axios.create({
     baseURL: `${BASE_URL}/`,
     validateStatus: () => true,
     headers: { Authorization: localStorage.getItem('access_token') ? 'JWT ' + localStorage.getItem('access_token') : null, 'Content-Type': 'application/json', accept: 'application/json', },
 })
 
-axiosInstance.interceptors.response.use(
-    (response) => { return response },
-    async (error) => {
-        const originalRequest = error.config
-        if (typeof error.response === 'undefined') {
-            window.alert('A server/network error occurred. ')
-            return Promise.reject(error)
-        }
-        if (
-            error.response.status === 401 && originalRequest.url === BASE_URL + 'token/refresh') {
-            //REDIRECT TO LOGIN
-            window.alert('You must login first. ')
-            return Promise.reject(error)
-        }
-        if (error.response.data.code === 'token_not_valid' && error.response.status === 401 && error.response.statusText === 'Unauthorized') {
-            const refreshToken = localStorage.getItem('refresh_token')
-            if (refreshToken) {
-                const tokenExpDate = parseJwt(refreshToken)?.exp
-                const now = Math.ceil(Date.now() / 1000)
-                if (tokenExpDate > now) {
-                    return axiosInstance.post('/token/refresh', { refresh: refreshToken }).then((response) => {
-                        console.log(response.data)
-                        localStorage.setItem('access_token', response.data.access)
-                        axiosInstance.defaults.headers['Authorization'] = 'JWT ' + response.data.access
-                        originalRequest.headers['Authorization'] = 'JWT ' + response.data.access
-                        return axiosInstance(originalRequest)
-                    })
-                }
-                else {
-                    //REDIRECT TO LOGIN
-                    window.alert('You must login first. ')
-                }
-            }
-            else {
-                //REDIRECT TO LOGIN
-                window.alert('You must login first. ')
-            }
-        }
-        return Promise.reject(error)
-    }
-)
 
 
 export const getAllPosts = () => {
@@ -118,6 +87,23 @@ export const deletePost = (id) => {
     return axiosInstance.delete(`${DELETE_POST}${id}/`)
 }
 
-export const addTokenToBlacklist = (refresh_token) => {
-    return axiosInstance.post(TOKEN_TO_BLAKLIST, refresh_token)
+export const getUserById = (id) => {
+    return axiosInstance.get(`${GET_USER_DETAIL}${id}/`)
 }
+
+export const editUser = (id) => {
+    return axiosInstance.put(`${EDIT_USER}${id}/`)
+}
+
+export const deleteUser = (id) => {
+    return axiosInstance.get(`${DELETE_USER}${id}/`)
+}
+
+export const resetPassword = (email) => {
+    return axiosInstance.post(PASSWORD_RESET, email)
+}
+
+export const passwordReseConfirm = (token, password) => {
+    return axiosInstance.post(PASSWORD_RESET_CONFIRM, token, password)
+}
+

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Redirect, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { useRegister } from "../hooks/useRegister"
 import { regiserUser } from "../service"
 

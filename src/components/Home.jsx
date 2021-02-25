@@ -1,8 +1,9 @@
-const Home = ({user}) => {
-    return(
-        <div>
+const Home = ({ user }) => {
+
+    return (
+        <>
             <h1>{user}</h1>
-        </div>
+        </>
     )
 }
 

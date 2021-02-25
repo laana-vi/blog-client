@@ -1,16 +1,28 @@
-import { useState } from "react"
-import { parseJwt, token, addTokenToBlacklist, axiosInstance } from "./service"
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { useEffect, useState } from "react"
+import { parseJwt, token, axiosInstance, getAllPosts } from "./service"
+import { BrowserRouter as Router, Switch, Route, Link, useHistory } from 'react-router-dom'
 import Home from "./components/Home"
 import Admin from "./components/Admin"
 import Settings from "./components/Settings"
 import Login from "./components/Login"
 import Register from "./components/Register"
+import PrivateRoute from "./components/PrivateRoute"
 
 
 const App = () => {
     const [user, setUser] = useState(parseJwt(token)?.user_name)
+    const [posts, setPosts] = useState()
+    const history = useHistory()
 
+    useEffect(() => {
+        let mounted = true
+        if (mounted) {
+            getAllPosts().then(res =>
+                setPosts(res.data))
+        }
+        mounted = false
+
+    }, [])
 
     return (
         <>
@@ -19,35 +31,29 @@ const App = () => {
                     {
                         user ?
                             <>
-                                <Link to='/home'>Home</Link>
+                                <Link to='/'>Home</Link>
                                 <Link to='/admin'>Admin</Link>
                                 <Link to='/settings'>Settings</Link>
                                 <button onClick={() => {
-                                    addTokenToBlacklist({ refresh_token: localStorage.getItem('refresh_token') })
                                     localStorage.removeItem('access_token')
-                                    localStorage.removeItem('refresh_token')
                                     axiosInstance.defaults.headers['Authorization'] = null
                                 }}>Logout</button>
                             </>
                             :
                             <>
+
                                 <Link to="/login">Login</Link>
                                 <Link to='/register'>Register</Link>
                             </>
                     }
                 </nav>
+
                 <Switch>
-                    <Route exact path='/home'>
-                        <Home user={user} />
-                    </Route>
-                    <Route exact path='/admin'>
-                        <Admin />
-                    </Route>
-                    <Route exaact path="/settings">
-                        <Settings />
-                    </Route>
+                    <PrivateRoute exact path='/' user={user} Component={Home} />
+                    <PrivateRoute exact path='/admin' user={user} Component={Admin} />
+                    <PrivateRoute exact path="/settings" user={user} Component={Settings} />
                     <Route exact path="/login">
-                        <Login />
+                        <Login user={user} />
                     </Route>
                     <Route exact path="/register">
                         <Register />

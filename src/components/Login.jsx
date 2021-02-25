@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import { axiosInstance, loginUser } from "../service"
 
-const Login = () => {
+const Login = ({ user }) => {
     const [error, setError] = useState('')
     const [usernameLogin, setUsernameLogin] = useState('')
     const [passwordLogin, setPasswordLogin] = useState('')
@@ -15,22 +15,21 @@ const Login = () => {
                 loginUser({
                     user_name: usernameLogin,
                     password: passwordLogin
-                })
-                    .then(res => {
-                        if (res.status === 200) {
-                            localStorage.setItem('access_token', res.data.access)
-                            localStorage.setItem('refresh_token', res.data.refresh)
-                            axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token')
-                            history.push('/home')
+                }).then(res => {
+                    if (res.status === 200) {
+                        localStorage.setItem('access_token', res.data.access)
+                        axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token')
+                        history.push('/')
+                    }
+                    else if (res.status === 401) {
+                        setError('information not valid')
+                    }
+                    else if (res.status === 500) {
+                        setError('server error')
+                    }
+                    
 
-                        }
-                        else if(res.status === 401){
-                            setError('information not valid')
-                        }
-                        else if(res.status === 500) {
-                            setError('server error')
-                        }
-                    })
+                })
             }}>Login</button>
             <p>{error}</p>
         </div>
