@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
-import { useRegister } from "../hooks/useRegister"
-import { regiserUser } from "../service"
+import { useRegister } from "../../hooks/useRegister"
+import { regiserUser } from "../../service"
 
 const Register = () => {
     const [email, setEmail, username, setUsername, firstName, setFirstName, lastName, setLastName, dateOfBirth, setDateOfBirth, password, setPassword] = useRegister()

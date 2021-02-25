@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react"
 import { getAllCategories, getAllPosts, parseJwt, token } from "./service"
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
-import Home from "./components/Home"
-import Admin from "./components/Admin"
-import Settings from "./components/Settings"
-import Login from "./components/Login"
-import Register from "./components/Register"
-import PrivateRoute from "./routes/PrivateRoute"
+
+import Admin from "./components/admin/Admin"
+import AdminPost from "./components/admin/AdminPost"
+import Login from "./components/authorization/Login"
+import Register from "./components/authorization/Register"
+import Home from "./components/blog/Home"
+import Settings from "./components/settings/Settings"
+import PasswordReset from "./components/settings/PasswordReset"
+import PasswordResetConfirm from "./components/settings/PasswordResetConfirm"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
+import BasicRoute from "./components/BasicRoute"
 import PublicRoute from "./routes/PublicRoute"
-import AdminPost from "./components/AdminPost"
+import PrivateRoute from "./routes/PrivateRoute"
+
+
+
 
 
 const App = () => {
@@ -26,8 +33,7 @@ const App = () => {
         getAllPosts().then(res => {
             user && setPosts(res.data)
         })
-    }, [])
-
+    }, [user])
 
     return (
         <>
@@ -35,12 +41,16 @@ const App = () => {
                 <Header user={user} />
                 <main>
                     <Switch>
-                        <PrivateRoute exact path='/' user={user} Component={() => <Home user={user}  posts={posts} />} />
-                        <PrivateRoute exact path='/admin' user={user} Component={() => <Admin user={user} categories={categories} />} />
-                        <PrivateRoute exact path='/admin/:id' user={user} Component={() => <AdminPost categories={categories} />} />
+                        <PublicRoute exact path="/" Component={() => <BasicRoute user={user} />} />
+                        <PrivateRoute exact path="/home" user={user} Component={() => <Home user={user} posts={posts} />} />
+                        <PrivateRoute exact path="/admin" user={user} Component={() => <Admin user={user} categories={categories} />} />
+                        <PrivateRoute exact path="/admin/:id" user={user} Component={() => <AdminPost categories={categories} />} />
                         <PrivateRoute exact path="/settings" user={user} Component={Settings} />
                         <PublicRoute exact path="/login" Component={() => <Login user={user} />} />
                         <PublicRoute exact path="/register" Component={() => <Register />} />
+                        <PublicRoute exact path="/password-reset" Component={() => <PasswordReset />} />
+                        <PublicRoute exact path="/password-reset-confirm" Component={() => <PasswordResetConfirm />} />
+
                     </Switch>
                 </main>
                 <Footer />

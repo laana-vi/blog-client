@@ -9,7 +9,7 @@ const Header = ({ user }) => {
                 {
                     user ?
                         <>
-                            <Link to='/'>Home</Link>
+                            <Link to='/home'>Home</Link>
                             <Link to='/admin'>Admin</Link>
                             <Link to='/settings'>Settings</Link>
                             <button onClick={() => {
@@ -20,7 +20,6 @@ const Header = ({ user }) => {
                         </>
                         :
                         <>
-
                             <Link to="/login">Login</Link>
                             <Link to='/register'>Register</Link>
                         </>

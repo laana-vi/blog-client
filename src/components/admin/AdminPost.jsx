@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { usePost } from "../hooks/usePost"
-import { editPost, getPostById } from "../service"
 import slugify from 'react-slugify'
+import { usePost } from "../../hooks/usePost"
+import { editPost, getPostById } from "../../service"
 
 const AdminPost = ({ posts, categories }) => {
     let { id } = useParams()
@@ -26,17 +26,13 @@ const AdminPost = ({ posts, categories }) => {
         <div>
             <h3>Edit post</h3>
             <div>
-                <div>
-                    <label>Title: </label>
-                </div>
+                <label>Title: </label>
                 <input placeholder={title} type="text" onChange={(e) => {
                     setTitle(e.target.value)
                     setSlug(slugify(e.target.value))
                 }} />
             </div>
-            <div>
-                <p>Slug: {slug}</p>
-            </div>
+            <p>Slug: {slug}</p>
             <div>
                 <div>
                     <label>Content: </label>
@@ -55,9 +51,7 @@ const AdminPost = ({ posts, categories }) => {
                 </select>
             </div>
             <div>
-                <div>
-                    <label>Image: </label>
-                </div>
+                <label>Image: </label>
                 <input type="file" onChange={(e) => {
                     setImage(e.target.files)
                 }} />

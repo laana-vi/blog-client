@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { useHistory } from "react-router-dom"
-import { axiosInstance, loginUser } from "../service"
+import { Link, useHistory } from "react-router-dom"
+import { axiosInstance, loginUser } from "../../service"
 
 const Login = ({ user }) => {
     const [error, setError] = useState('')
@@ -19,7 +19,8 @@ const Login = ({ user }) => {
                     if (res.status === 200) {
                         localStorage.setItem('access_token', res.data.access)
                         axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token')
-                        history.push('/')
+                        window.location.reload()
+                        history.push('/home')
                     }
                     else if (res.status === 401) {
                         setError('information not valid')
@@ -27,11 +28,11 @@ const Login = ({ user }) => {
                     else if (res.status === 500) {
                         setError('server error')
                     }
-                    
 
                 })
             }}>Login</button>
             <p>{error}</p>
+            <Link to="/password-reset">Forgot your password?</Link>
         </div>
     )
 }

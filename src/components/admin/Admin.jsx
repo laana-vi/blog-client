@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { usePost } from "../hooks/usePost"
-import { addPost, deletePost, getAllPosts, parseJwt, token } from "../service"
+import { usePost } from "../../hooks/usePost"
+import { addPost, deletePost, getAllPosts, parseJwt, token } from "../../service"
 import slugify from 'react-slugify'
 
 const Admin = ({ user, categories }) => {
@@ -36,29 +36,20 @@ const Admin = ({ user, categories }) => {
             <div>
                 <h3>Add new post</h3>
                 <div>
-                    <div>
-                        <label>Title: </label>
-                    </div>
+                    <label>Title: </label>
                     <input type="text" onChange={(e) => {
                         setTitle(e.target.value)
                         setSlug(slugify(e.target.value))
                     }} />
                 </div>
+                <p>Slug: {slug}</p>
                 <div>
-                    <p>Slug: {slug}</p>
-                </div>
-                <div>
-                    <div>
-                        <label>Content: </label>
-                    </div>
-
+                    <label>Content: </label>
                     <textarea id="" cols="50" rows="10" onChange={(e) => {
                         setContent(e.target.value)
                     }}></textarea>
                 </div>
-                <div>
-                    <p>Author: {user}</p>
-                </div>
+                <p>Author: {user}</p>
                 <div>
                     <label>Category: </label>
                     <select onChange={(e) => {
@@ -68,9 +59,7 @@ const Admin = ({ user, categories }) => {
                     </select>
                 </div>
                 <div>
-                    <div>
-                        <label>Image: </label>
-                    </div>
+                    <label>Image: </label>
                     <input type="file" onChange={(e) => {
                         setImage(e.target.files)
                     }} />
