@@ -1,5 +1,5 @@
 import { Link, useHistory } from "react-router-dom"
-import { axiosInstance } from "../service"
+import { axiosInstance } from "../../service"
 
 const Header = ({ user }) => {
     const history = useHistory()

@@ -97,12 +97,12 @@ export const getUserById = (id) => {
     return axiosInstance.get(`${GET_USER_DETAIL}${id}/`)
 }
 
-export const editUser = (id) => {
-    return axiosInstance.put(`${EDIT_USER}${id}/`)
+export const editUser = (id, user) => {
+    return axiosInstance.put(`${EDIT_USER}${id}/`, user)
 }
 
 export const deleteUser = (id) => {
-    return axiosInstance.get(`${DELETE_USER}${id}/`)
+    return axiosInstance.delete(`${DELETE_USER}${id}/`)
 }
 
 export const resetPassword = (email) => {

@@ -10,9 +10,9 @@ import Home from "./components/blog/Home"
 import Settings from "./components/settings/Settings"
 import PasswordReset from "./components/settings/PasswordReset"
 import PasswordResetConfirm from "./components/settings/PasswordResetConfirm"
-import Header from "./components/Header"
-import Footer from "./components/Footer"
-import BasicRoute from "./components/BasicRoute"
+import Header from "./components/basic/Header"
+import Footer from "./components/basic/Footer"
+import BasicRoute from "./components/basic/BasicRoute"
 import PublicRoute from "./routes/PublicRoute"
 import PrivateRoute from "./routes/PrivateRoute"
 
@@ -45,7 +45,7 @@ const App = () => {
                         <PrivateRoute exact path="/home" user={user} Component={() => <Home user={user} posts={posts} />} />
                         <PrivateRoute exact path="/admin" user={user} Component={() => <Admin user={user} categories={categories} />} />
                         <PrivateRoute exact path="/admin/:id" user={user} Component={() => <AdminPost categories={categories} />} />
-                        <PrivateRoute exact path="/settings" user={user} Component={Settings} />
+                        <PrivateRoute exact path="/settings" user={user} Component={() => <Settings user={user} />} />
                         <PublicRoute exact path="/login" Component={() => <Login user={user} />} />
                         <PublicRoute exact path="/register" Component={() => <Register />} />
                         <PublicRoute exact path="/password-reset" Component={() => <PasswordReset />} />
