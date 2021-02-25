@@ -30,7 +30,7 @@ export const parseJwt = (token) => {
     else return undefined
 }
 
-export const isValidToken = () => {
+const isValidToken = () => {
     const expTime = parseJwt(token)?.exp
     const timeNow = Math.ceil(new Date() / 1000)
     return timeNow > expTime && localStorage.removeItem('access_token')
@@ -42,6 +42,12 @@ export const axiosInstance = axios.create({
     baseURL: `${BASE_URL}/`,
     validateStatus: () => true,
     headers: { Authorization: localStorage.getItem('access_token') ? 'JWT ' + localStorage.getItem('access_token') : null, 'Content-Type': 'application/json', accept: 'application/json', },
+})
+
+export const axiosInstanceForFiles = axios.create({
+    baseURL: `${BASE_URL}/`,
+    validateStatus: () => true,
+    headers: { Authorization: localStorage.getItem('access_token') ? 'JWT ' + localStorage.getItem('access_token') : null, 'Content-Type': 'multipart/form-data' },
 })
 
 
@@ -72,12 +78,12 @@ export const loginUser = (user) => {
 }
 
 export const addPost = (post) => {
-    return axiosInstance.post(ADD_POST, post)
+    return axiosInstanceForFiles.post(ADD_POST, post)
 }
 
 export const editPost = (id, post) => {
-    return axiosInstance.put(`${EDIT_POST}${id}/`, post)
-}
+    return axiosInstanceForFiles.put(`${EDIT_POST}${id}/`, post)
+}        
 
 export const getPostById = (id) => {
     return axiosInstance.get(`${GET_POST_TO_EDIT}${id}`)
