@@ -6,6 +6,7 @@ const Header = ({ user }) => {
     return (
         <header>
             <nav>
+                <h3>{user}</h3>
                 {
                     user ?
                         <>
@@ -16,6 +17,7 @@ const Header = ({ user }) => {
                                 localStorage.removeItem('access_token')
                                 axiosInstance.defaults.headers['Authorization'] = null
                                 history.push('/login')
+                                window.location.reload()
                             }}>Logout</button>
                         </>
                         :

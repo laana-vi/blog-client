@@ -19,8 +19,8 @@ const Login = ({ user }) => {
                     if (res.status === 200) {
                         localStorage.setItem('access_token', res.data.access)
                         axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token')
-                        window.location.reload()
                         history.push('/home')
+                        window.location.reload()
                     }
                     else if (res.status === 401) {
                         setError('information not valid')

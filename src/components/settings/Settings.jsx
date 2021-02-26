@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect} from "react"
 import { useHistory } from "react-router-dom"
 import { useRegister } from "../../hooks/useRegister"
 import { deleteUser, editUser, getUserById, parseJwt, token } from "../../service"
 
 const Settings = () => {
-    const [email, setEmail, username, setUsername, firstName, setFirstName, lastName, setLastName, dateOfBirth, setDateOfBirth, password, setPassword] = useRegister()
-    const [user, setUser] = useState(null)
+    const [email, setEmail, username, setUsername, firstName, setFirstName, lastName, setLastName, dateOfBirth, setDateOfBirth] = useRegister()
     const history = useHistory()
     let userId = parseJwt(token).user_id
 
@@ -18,12 +17,10 @@ const Settings = () => {
                 setFirstName(res.data.first_name)
                 setLastName(res.data.last_name)
                 setDateOfBirth(res.data.date_of_birth)
-                setUser(res.data)
             }
             mounted = false
         })
     }, [userId, setEmail, setUsername, setFirstName, setLastName, setDateOfBirth])
-
 
     return (
         <div>

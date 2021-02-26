@@ -15,6 +15,7 @@ const EDIT_USER = `${USERS}user/edit/`
 const DELETE_USER = `${USERS}user/delete/`
 const PASSWORD_RESET = 'password_reset/'
 const PASSWORD_RESET_CONFIRM = 'password_reset/confirm/'
+const EDIT_LIKES = 'edit/likes/'
 
 export const token = localStorage.getItem('access_token')
 
@@ -38,6 +39,19 @@ const isValidToken = () => {
 
 isValidToken()
 
+export const truncate = (str) => {
+    return str.split(' ').length > 50 ? str.split(' ').slice(50).join(' ') + '...' : str
+}
+
+export const getAuthorName = (users, authorId) => {
+    return users?.find(user => user?.id==authorId)
+}
+
+export const getTime = (timeStr) => {
+    let timeArr = timeStr.split('-')
+    return `${timeArr[2].substring(0, 2)}.${timeArr[1]}.${timeArr[0]}`
+}
+
 export const axiosInstance = axios.create({
     baseURL: `${BASE_URL}/`,
     validateStatus: () => true,
@@ -49,8 +63,6 @@ export const axiosInstanceForFiles = axios.create({
     validateStatus: () => true,
     headers: { Authorization: localStorage.getItem('access_token') ? 'JWT ' + localStorage.getItem('access_token') : null, 'Content-Type': 'multipart/form-data' },
 })
-
-
 
 export const getAllPosts = () => {
     return axiosInstance.get(POSTS)
@@ -83,7 +95,7 @@ export const addPost = (post) => {
 
 export const editPost = (id, post) => {
     return axiosInstanceForFiles.put(`${EDIT_POST}${id}/`, post)
-}        
+}
 
 export const getPostById = (id) => {
     return axiosInstance.get(`${GET_POST_TO_EDIT}${id}`)
@@ -113,3 +125,6 @@ export const passwordReseConfirm = (token, password) => {
     return axiosInstance.post(PASSWORD_RESET_CONFIRM, token, password)
 }
 
+export const editLikesBySlug = (slug, like) => {
+    return axiosInstance.put(`${EDIT_LIKES}${slug}/`, like)
+}
