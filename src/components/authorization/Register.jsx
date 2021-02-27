@@ -2,11 +2,13 @@ import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import { useRegister } from "../../hooks/useRegister"
 import { regiserUser } from "../../service"
+import Error from "../basic/Error"
 
 const Register = () => {
     const [email, setEmail, username, setUsername, firstName, setFirstName, lastName, setLastName, dateOfBirth, setDateOfBirth, password, setPassword] = useRegister()
     const [error, setError] = useState('')
     const history = useHistory()
+
     return (
         <div>
             <input type="email" placeholder="email" onChange={(e) => { setEmail(e.target.value.trim()) }} />
@@ -25,7 +27,6 @@ const Register = () => {
                     password: password
                 }).then(res => {
                     if (res.status === 201) {
-                        setError('success')
                         history.push('/login')
                     }
                     else if (res.data.email) {
@@ -45,7 +46,9 @@ const Register = () => {
                     }
                 })
             }}>Register</button>
-            <p>{error}</p>
+            <div>
+                <Error error={error} setError={setError}/>
+            </div>
         </div>
     )
 }
