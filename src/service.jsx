@@ -61,7 +61,7 @@ export const axiosInstance = axios.create({
 export const axiosInstanceForFiles = axios.create({
     baseURL: `${BASE_URL}/`,
     validateStatus: () => true,
-    headers: { Authorization: localStorage.getItem('access_token') ? 'JWT ' + localStorage.getItem('access_token') : null, 'Content-Type': 'multipart/form-data' },
+    headers: { Authorization: localStorage.getItem('access_token') ? 'JWT ' + localStorage.getItem('access_token') : null, 'Content-Type': 'multipart/form-data', },
 })
 
 export const getAllPosts = () => {

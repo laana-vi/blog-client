@@ -65,6 +65,8 @@ const Admin = ({ user, categories }) => {
                     }} />
                 </div>
                 <button onClick={() => {
+                    let date = new Date()
+                    date = `${date.getFullYear()}-${date.getUTCMonth()}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
                     let formData = new FormData()
                     formData.append('title', title)
                     formData.append('content', content)
@@ -72,6 +74,7 @@ const Admin = ({ user, categories }) => {
                     formData.append('author', author)
                     formData.append('category', category)
                     formData.append('image', image[0])
+                    formData.append('timestamp', date)
                     addPost(formData).then(res => console.log(res))
                 }}>Add post</button>
             </div>

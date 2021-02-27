@@ -19,8 +19,7 @@ const Login = ({ user }) => {
                     if (res.status === 200) {
                         localStorage.setItem('access_token', res.data.access)
                         axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token')
-                        history.push('/home')
-                        window.location.reload()
+                        setTimeout(() => history.push('/home'), 1000)
                     }
                     else if (res.status === 401) {
                         setError('information not valid')
@@ -28,7 +27,6 @@ const Login = ({ user }) => {
                     else if (res.status === 500) {
                         setError('server error')
                     }
-
                 })
             }}>Login</button>
             <p>{error}</p>

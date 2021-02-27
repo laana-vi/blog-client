@@ -32,8 +32,7 @@ const Post = ({ posts, users }) => {
             <button onClick={() => {
                 editLikesBySlug(slug, { "likes": [...post?.likes, userId] }).then(res => {
                     setLikes(res?.data?.likes?.length)
-                    history.push('/home')
-                    window.location.reload()
+                    console.log(res.data)
                 })
             }}>Like</button>
             <button onClick={() => {
