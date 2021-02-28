@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { usePost } from "../../hooks/usePost"
 import { addPost, deletePost, getAllPosts, parseJwt, token } from "../../service"
 import slugify from 'react-slugify'
+import Error from "../basic/Error"
 
 const Admin = ({ user, categories }) => {
     const [posts, setPosts] = useState([])
+    const [title, setTitle, content, setContent, author, setAuthor, category, setCategory, slug, setSlug, image, setImage, likes, setLikes] = usePost()
+    const [error, setError] = useState('')
+    const history = useHistory()
+
     const userId = parseJwt(token).user_id
-    const [title, setTitle, content, setContent, author, setAuthor, category, setCategory, slug, setSlug, image, setImage] = usePost()
 
     useEffect(() => {
         let mounted = true
         getAllPosts().then(res => {
             if (mounted) {
-                setPosts([...res.data].filter(post => post.author == userId))
+                setPosts([...res.data].filter(post => Number(post.author) === Number(userId)))
             }
             mounted = false
         })
+
     }, [userId])
 
     return (
@@ -75,8 +80,25 @@ const Admin = ({ user, categories }) => {
                     formData.append('category', category)
                     formData.append('image', image[0])
                     formData.append('timestamp', date)
-                    addPost(formData).then(res => console.log(res))
+                    addPost(formData).then(res => {
+                        if (res.status === 400) {
+                            if (res.data.title) {
+                                setError(res.data.title)
+                            }
+                            else if (res.data.content) {
+                                setError(res.data.content)
+                            }
+                            else if (res.data.image) {
+                                setError(res.data.image)
+                            }
+                        }
+                        else {
+                            history.push('/home')
+                            window.location.reload()
+                        }
+                    })
                 }}>Add post</button>
+                <Error error={error} setError={setError} />
             </div>
         </>
     )

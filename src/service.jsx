@@ -94,7 +94,7 @@ export const addPost = (post) => {
 }
 
 export const editPost = (id, post) => {
-    return axiosInstanceForFiles.put(`${EDIT_POST}${id}/`, post)
+    return axiosInstanceForFiles.patch(`${EDIT_POST}${id}/`, post)
 }
 
 export const getPostById = (id) => {

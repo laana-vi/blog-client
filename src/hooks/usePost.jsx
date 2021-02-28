@@ -8,7 +8,7 @@ export const usePost = () => {
     const [category, setCategory] = useState('')
     const [slug, setSlug] = useState('')
     const [image, setImage] = useState('')
+    const [timestamp, setTimestamp] = useState('')
 
-
-    return [title, setTitle, content, setContent, author, setAuthor, category, setCategory, slug, setSlug, image, setImage]
+    return [title, setTitle, content, setContent, author, setAuthor, category, setCategory, slug, setSlug, image, setImage, timestamp, setTimestamp]
 }

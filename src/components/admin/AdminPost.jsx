@@ -1,12 +1,15 @@
-import { useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useHistory, useParams } from "react-router-dom"
 import slugify from 'react-slugify'
 import { usePost } from "../../hooks/usePost"
 import { editPost, getPostById } from "../../service"
+import Error from "../basic/Error"
 
 const AdminPost = ({ posts, categories }) => {
     let { id } = useParams()
-    const [title, setTitle, content, setContent, author, setAuthor, category, setCategory, slug, setSlug, image, setImage] = usePost()
+    const [title, setTitle, content, setContent, author, setAuthor, category, setCategory, slug, setSlug, image, setImage,timestamp, setTimestamp] = usePost()
+    const [error, setError] = useState('')
+    const history = useHistory()
 
     useEffect(() => {
         let mounted = true
@@ -18,16 +21,17 @@ const AdminPost = ({ posts, categories }) => {
                 setCategory(res.data.category)
                 setSlug(res.data.slug)
                 setImage(res.data.image)
+                setTimestamp(res.data.timestamp)
             }
             mounted = false
         })
-    }, [id, setTitle, setContent, setAuthor, setCategory, setSlug, setImage])
+    }, [id, setTitle, setContent, setAuthor, setCategory, setSlug, setImage, setTimestamp])
     return (
         <div>
             <h3>Edit post</h3>
             <div>
                 <label>Title: </label>
-                <input placeholder={title} type="text" onChange={(e) => {
+                <input value={title} type="text" onChange={(e) => {
                     setTitle(e.target.value)
                     setSlug(slugify(e.target.value))
                 }} />
@@ -38,7 +42,7 @@ const AdminPost = ({ posts, categories }) => {
                     <label>Content: </label>
                 </div>
 
-                <textarea placeholder={content} id="" cols="50" rows="10" onChange={(e) => {
+                <textarea value={content} id="" cols="50" rows="10" onChange={(e) => {
                     setContent(e.target.value)
                 }}></textarea>
             </div>
@@ -64,9 +68,29 @@ const AdminPost = ({ posts, categories }) => {
                 formData.append('author', author)
                 formData.append('category', category)
                 formData.append('id', id)
+                formData.append('timestamp', timestamp)
                 image[0] !== 'h' && formData.append('image', image[0])
-                editPost(id, formData)
+                editPost(id, formData).then(res => {
+
+                    if (res.status === 400) {
+                        if (res.data.title) {
+                            setError(res.data.title)
+                        }
+                        else if (res.data.content) {
+                            setError(res.data.content)
+                        }
+                        else if (res.data.image) {
+                            setError(res.data.image)
+                        }
+                    }
+                    else {
+                        history.push('/home')
+                        window.location.reload()
+                    }
+                    console.log(res)
+                })
             }}>Edit post</button>
+            <Error error={error} setError={setError} />
         </div>
     )
 }

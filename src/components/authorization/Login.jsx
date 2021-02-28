@@ -1,12 +1,14 @@
 import { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { axiosInstance, loginUser } from "../../service"
+import Error from "../basic/Error"
 
-const Login = ({ user }) => {
+const Login = () => {
     const [error, setError] = useState('')
     const [usernameLogin, setUsernameLogin] = useState('')
     const [passwordLogin, setPasswordLogin] = useState('')
     const history = useHistory()
+
     return (
         <div>
             <input type="text" placeholder="username" onChange={(e) => setUsernameLogin(e.target.value)} />
@@ -16,20 +18,26 @@ const Login = ({ user }) => {
                     user_name: usernameLogin,
                     password: passwordLogin
                 }).then(res => {
+
                     if (res.status === 200) {
                         localStorage.setItem('access_token', res.data.access)
                         axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token')
-                        setTimeout(() => history.push('/home'), 1000)
+                        window.location.reload()
+                        history.push('/')
+
+                    }
+                    else if (res.data.user_name) {
+                        setError(res.data.user_name[0])
+                    }
+                    else if (res.data.password) {
+                        setError(res.data.password[0])
                     }
                     else if (res.status === 401) {
-                        setError('information not valid')
-                    }
-                    else if (res.status === 500) {
-                        setError('server error')
+                        setError(res.data.detail)
                     }
                 })
             }}>Login</button>
-            <p>{error}</p>
+            <Error error={error} setError={setError} />
             <Link to="/password-reset">Forgot your password?</Link>
         </div>
     )

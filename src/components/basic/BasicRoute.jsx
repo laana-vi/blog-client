@@ -1,9 +1,10 @@
 import { Redirect } from "react-router-dom"
+import { token } from "../../service"
 
-const BasicRoute = ({user}) => {
+const BasicRoute = () => {
     return(
         <>
-        {user ? <Redirect to="/home"/> : <Redirect to="/login"/>}
+        {token ? <Redirect to="/home"/> : <Redirect to="/login"/>}
         </>
     )
 }

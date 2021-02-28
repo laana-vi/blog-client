@@ -63,8 +63,8 @@ const App = () => {
                 <Header user={user} />
                 <main>
                     <Switch>
-                        <PublicRoute exact path="/" Component={() => <BasicRoute user={user} />} />
-                        <PublicRoute exact path="/login" Component={() => <Login user={user} />} />
+                        <PublicRoute exact path="/" Component={() => <BasicRoute />} />
+                        <PublicRoute exact path="/login" Component={() => <Login />} />
                         <PublicRoute exact path="/register" Component={() => <Register />} />
                         <PublicRoute exact path="/password-reset" Component={() => <PasswordReset />} />
                         <PublicRoute exact path="/password-reset-confirm" Component={() => <PasswordResetConfirm />} />
