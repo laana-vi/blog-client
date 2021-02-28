@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { usePost } from "../../hooks/usePost"
-import { addPost, deletePost, getAllPosts, parseJwt, token } from "../../service"
-import slugify from 'react-slugify'
+import { addPost, deletePost, getAllPosts, parseJwt, slugify, token } from "../../service"
 import Error from "../basic/Error"
 
 const Admin = ({ user, categories }) => {
@@ -19,9 +18,8 @@ const Admin = ({ user, categories }) => {
             if (mounted) {
                 setPosts([...res.data].filter(post => Number(post.author) === Number(userId)))
             }
-            mounted = false
         })
-
+        return () => { mounted = false }
     }, [userId])
 
     return (
@@ -32,7 +30,9 @@ const Admin = ({ user, categories }) => {
                         <div key={post.id}>
                             <Link to={`/admin/${post.id}`}>{post.title}</Link>
                             <button onClick={() => {
-                                deletePost(post.id).then(res => console.log(res))
+                                deletePost(post.id)
+                                history.push('/home')
+                                window.location.reload()
                             }}>Delete</button>
                         </div>
                     )
@@ -60,6 +60,7 @@ const Admin = ({ user, categories }) => {
                     <select onChange={(e) => {
                         setCategory(e.target.value)
                     }}>
+                        <option defaultValue='-1'>Select Category</option>
                         {categories.map(category => <option key={category.id} value={category.name}>{category.name}</option>)}
                     </select>
                 </div>
@@ -96,6 +97,7 @@ const Admin = ({ user, categories }) => {
                             history.push('/home')
                             window.location.reload()
                         }
+                        console.log(res)
                     })
                 }}>Add post</button>
                 <Error error={error} setError={setError} />

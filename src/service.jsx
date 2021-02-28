@@ -40,17 +40,22 @@ const isValidToken = () => {
 isValidToken()
 
 export const truncate = (str) => {
-    return str.split(' ').length > 50 ? str.split(' ').slice(50).join(' ') + '...' : str
+    return str.split(' ').length > 20 ? str.split(' ').slice(0, 20).join(' ') + '...' : str
 }
 
+export const slugify = (str) => {
+    return str.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-').trim()
+}
 export const getAuthorName = (users, authorId) => {
-    return users?.find(user => user?.id==authorId)
+    return users?.find(user => Number(user?.id) === Number(authorId))
 }
 
 export const getTime = (timeStr) => {
     let timeArr = timeStr.split('-')
     return `${timeArr[2].substring(0, 2)}.${timeArr[1]}.${timeArr[0]}`
 }
+
+
 
 export const axiosInstance = axios.create({
     baseURL: `${BASE_URL}/`,

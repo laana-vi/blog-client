@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
-import { editLikesBySlug, getPostBySlug, getTime, parseJwt, token } from "../../service"
+import { editLikesBySlug, getAuthorName, getPostBySlug, getTime, parseJwt, token } from "../../service"
 
 const Post = ({ posts, users }) => {
     let { slug } = useParams()
@@ -17,8 +17,8 @@ const Post = ({ posts, users }) => {
                 setPost(res.data)
                 setLikes(res.data.likes.length)
             }
-            mounted = false
         })
+        return () => { mounted = false }
     }, [slug])
     return (
         <div>
@@ -27,6 +27,7 @@ const Post = ({ posts, users }) => {
             </div>
             <h3>{post?.title}</h3>
             <p>{post?.content}</p>
+            <p>Written by: {getAuthorName(users, post?.author)?.user_name}</p>
             <small>{post && getTime(post?.timestamp)}</small>
             <p>Likes: {likes}</p>
             <button onClick={() => {

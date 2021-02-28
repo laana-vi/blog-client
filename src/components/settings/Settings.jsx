@@ -18,8 +18,8 @@ const Settings = () => {
                 setLastName(res.data.last_name)
                 setDateOfBirth(res.data.date_of_birth)
             }
-            mounted = false
         })
+        return () => { mounted = false }
     }, [userId, setEmail, setUsername, setFirstName, setLastName, setDateOfBirth])
 
     return (

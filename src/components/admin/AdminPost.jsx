@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
-import slugify from 'react-slugify'
 import { usePost } from "../../hooks/usePost"
-import { editPost, getPostById } from "../../service"
+import { editPost, getPostById, slugify } from "../../service"
 import Error from "../basic/Error"
 
 const AdminPost = ({ posts, categories }) => {
@@ -23,8 +22,8 @@ const AdminPost = ({ posts, categories }) => {
                 setImage(res.data.image)
                 setTimestamp(res.data.timestamp)
             }
-            mounted = false
         })
+        return () => { mounted = false }
     }, [id, setTitle, setContent, setAuthor, setCategory, setSlug, setImage, setTimestamp])
     return (
         <div>
@@ -48,9 +47,11 @@ const AdminPost = ({ posts, categories }) => {
             </div>
             <div>
                 <label>Category: </label>
+                <option defaultValue='-1'>Select Category</option>
                 <select onChange={(e) => {
                     setCategory(e.target.value)
                 }}>
+                    <option defaultValue='-1'>Select Category</option>
                     {categories.map(category => <option key={category.id} value={category.name}>{category.name}</option>)}
                 </select>
             </div>

@@ -18,23 +18,34 @@ import PrivateRoute from "./routes/PrivateRoute"
 import Post from "./components/blog/Post"
 
 
-
-
-
 const App = () => {
-    const [user, setUser] = useState(parseJwt(token)?.user_name)
+    const [user] = useState(parseJwt(token)?.user_name)
     const [categories, setCategories] = useState([])
     const [posts, setPosts] = useState([])
     const [users, setUsers] = useState([])
+    const [select, setSelect] = useState('-1')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage] = useState(5)
+    const [loading, setLoading] = useState(false)
+
+
+    let indexOfLastPost = currentPage * postsPerPage
+    let indexOfFirstPost = indexOfLastPost - postsPerPage
+    let currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
 
     useEffect(() => {
         let mounted = true
+        setLoading(true)
         getAllCategories().then(res => {
             if (mounted) {
                 setCategories(res.data)
+                setLoading(false)
             }
-            mounted = false
         })
+        return () => { mounted = false }
     }, [])
 
     useEffect(() => {
@@ -43,8 +54,8 @@ const App = () => {
             if (mounted) {
                 user && setPosts(res.data)
             }
-            mounted = false
         })
+        return () => { mounted = false }
     }, [user])
 
     useEffect(() => {
@@ -53,8 +64,8 @@ const App = () => {
             if (mounted) {
                 setUsers(res.data)
             }
-            mounted = false
         })
+        return () => { mounted = false }
     }, [])
 
     return (
@@ -68,13 +79,14 @@ const App = () => {
                         <PublicRoute exact path="/register" Component={() => <Register />} />
                         <PublicRoute exact path="/password-reset" Component={() => <PasswordReset />} />
                         <PublicRoute exact path="/password-reset-confirm" Component={() => <PasswordResetConfirm />} />
-                        <PrivateRoute exact path="/home" user={user} Component={() => <Home user={user} posts={posts} users={users} />} />
+                        <PrivateRoute exact path="/home" user={user} Component={() => <Home setPosts={setPosts} user={user} posts={select === '-1' ? currentPosts : currentPosts.filter(post => post.category === Number(select))} users={users} categories={categories} setSelect={setSelect} loading={loading} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />} />
                         <PrivateRoute exact path="/home/:slug" user={user} Component={() => <Post user={user} users={users} />} />
                         <PrivateRoute exact path="/admin" user={user} Component={() => <Admin user={user} categories={categories} />} />
                         <PrivateRoute exact path="/admin/:id" user={user} Component={() => <AdminPost categories={categories} />} />
                         <PrivateRoute exact path="/settings" user={user} Component={() => <Settings user={user} />} />
                     </Switch>
                 </main>
+                
                 <Footer />
             </Router>
         </>
