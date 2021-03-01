@@ -81,6 +81,7 @@ const Admin = ({ user, categories }) => {
                     formData.append('category', Number(category))
                     formData.append('image', image[0])
                     formData.append('timestamp', date)
+                    console.log(category)
                     addPost(formData).then(res => {
                         if (res.status === 400) {
                             if (res.data.title) {
