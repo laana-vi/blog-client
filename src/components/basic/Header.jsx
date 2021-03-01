@@ -1,34 +1,55 @@
+import { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { axiosInstance } from "../../service"
+import { StyledHeader } from "../styled/StyledHeader"
 
 const Header = ({ user }) => {
     const history = useHistory()
+    const [open, setOpen] = useState(false)
+
+
     return (
-        <header>
-            <nav>
-                <h3>{user}</h3>
-                {
-                    user ?
-                        <>
-                            <Link to='/blog'>Posts</Link>
-                            <Link to='/admin'>Admin</Link>
-                            <Link to='/settings'>Settings</Link>
-                            <button onClick={() => {
+        <StyledHeader open={open}>
+            {
+                user ?
+                    <nav className='header-container'>
+                        <div>
+                            <Link to='/blog' onClick={() => setOpen(!open)}><img className='pic' src='https://res.cloudinary.com/dpj7zvqzs/image/upload/v1614626528/media/posts/logo_tnx6vv.png' alt="" /></Link>
+                        </div>
+                        <ul className="nav-links">
+                            <li><Link className="item" to='/admin' onClick={() => setOpen(!open)}>MY POSTS</Link></li>
+                            <li><Link className="item" to='/settings' onClick={() => setOpen(!open)}>SETTINGS</Link></li>
+                            <li className="logout-button item" onClick={() => {
                                 localStorage.removeItem('access_token')
                                 axiosInstance.defaults.headers['Authorization'] = null
+                                setOpen(!open)
                                 history.push('/login')
                                 window.location.reload()
-                            }}>Logout</button>
-                        </>
-                        :
-                        <>
-                            <Link to="/login">Login</Link>
-                            <Link to='/register'>Register</Link>
-                        </>
-                }
-            </nav>
-        </header>
-
+                            }}>LOGOUT</li>
+                        </ul>
+                        <div className="burger" onClick={() => setOpen(!open)}>
+                            <div className="line1"></div>
+                            <div className="line2"></div>
+                            <div className="line3"></div>
+                        </div>
+                    </nav>
+                    :
+                    <nav className='header-container'>
+                        <div>
+                            <img className='pic' src='https://res.cloudinary.com/dpj7zvqzs/image/upload/v1614626528/media/posts/logo_tnx6vv.png' alt="" />
+                        </div>
+                        <ul className="nav-links">
+                            <li><Link className="item" to="/login" onClick={() => setOpen(!open)}>LOGIN</Link></li>
+                            <li><Link className="item" to='/register' onClick={() => setOpen(!open)}>REGISTER</Link></li>
+                        </ul>
+                        <div className="burger" onClick={() => setOpen(!open)}>
+                            <div className="line1"></div>
+                            <div className="line2"></div>
+                            <div className="line3"></div>
+                        </div>
+                    </nav>
+            }
+        </StyledHeader>
     )
 }
 

@@ -1,9 +1,9 @@
 import { Redirect } from "react-router-dom"
 
-const BasicRoute = () => {
+const BasicRoute = ({user}) => {
     return(
         <>
-        <Redirect to="/blog"/> 
+        {user ? <Redirect to="/blog"/> : <Redirect to="/login"/> }
         </>
     )
 }
