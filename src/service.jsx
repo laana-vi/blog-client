@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://127.0.0.1:8000/api'
+const BASE_URL = 'https://polar-crag-94921.herokuapp.com/api'
 const POSTS = 'posts/'
 const CATEGORIES = 'categories/'
 const USERS = 'users/'

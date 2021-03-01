@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { getAuthorName, getTime, truncate } from "../../service"
 import Pagination from "../basic/Pagination"
 
-const Home = ({ posts, setPosts, users, categories, setSelect, loading, postsPerPage, totalPosts, paginate }) => {
+const Home = ({ posts, users, categories, setSelect, loading, postsPerPage, totalPosts, paginate }) => {
     const [search, setSearch] = useState('')
 
     if (loading) {
