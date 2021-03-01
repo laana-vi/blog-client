@@ -78,7 +78,7 @@ const Admin = ({ user, categories }) => {
                     formData.append('content', content)
                     formData.append('slug', slug)
                     formData.append('author', author)
-                    formData.append('category', category)
+                    formData.append('category', Number(category))
                     formData.append('image', image[0])
                     formData.append('timestamp', date)
                     addPost(formData).then(res => {
