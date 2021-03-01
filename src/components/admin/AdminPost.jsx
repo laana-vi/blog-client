@@ -52,7 +52,7 @@ const AdminPost = ({ posts, categories }) => {
                     setCategory(e.target.value)
                 }}>
                     <option defaultValue='-1'>Select Category</option>
-                    {categories.map(category => <option key={category.id} value={category.name}>{category.name}</option>)}
+                    {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
                 </select>
             </div>
             <div>
@@ -67,7 +67,7 @@ const AdminPost = ({ posts, categories }) => {
                 formData.append('content', content)
                 formData.append('slug', slug)
                 formData.append('author', author)
-                formData.append('category', category)
+                formData.append('category', Number(category))
                 formData.append('id', id)
                 formData.append('timestamp', timestamp)
                 image[0] !== 'h' && formData.append('image', image[0])
@@ -85,7 +85,7 @@ const AdminPost = ({ posts, categories }) => {
                         }
                     }
                     else {
-                        history.push('/home')
+                        history.push('/blog')
                         window.location.reload()
                     }
                     console.log(res)

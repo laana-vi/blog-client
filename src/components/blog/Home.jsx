@@ -27,7 +27,7 @@ const Home = ({ posts, users, categories, setSelect, loading, postsPerPage, tota
                             <div>
                                 <img style={{ maxWidth: "300px" }} src={post.image} alt="" />
                             </div>
-                            <Link to={`/home/${post.slug}`}>
+                            <Link to={`/blog/${post.slug}`}>
                                 <h3>{post.title}</h3>
                             </Link>
                             <p>{truncate(post.content)}</p>

@@ -31,7 +31,7 @@ const Admin = ({ user, categories }) => {
                             <Link to={`/admin/${post.id}`}>{post.title}</Link>
                             <button onClick={() => {
                                 deletePost(post.id)
-                                history.push('/home')
+                                history.push('/blog')
                                 window.location.reload()
                             }}>Delete</button>
                         </div>
@@ -61,7 +61,7 @@ const Admin = ({ user, categories }) => {
                         setCategory(e.target.value)
                     }}>
                         <option defaultValue='-1'>Select Category</option>
-                        {categories.map(category => <option key={category.id} value={category.name}>{category.name}</option>)}
+                        {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
                     </select>
                 </div>
                 <div>
@@ -95,7 +95,7 @@ const Admin = ({ user, categories }) => {
                             }
                         }
                         else {
-                            history.push('/home')
+                            history.push('/blog')
                             window.location.reload()
                         }
                         console.log(res)

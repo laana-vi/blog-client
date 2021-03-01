@@ -10,7 +10,7 @@ const Header = ({ user }) => {
                 {
                     user ?
                         <>
-                            <Link to='/home'>Home</Link>
+                            <Link to='/blog'>Posts</Link>
                             <Link to='/admin'>Admin</Link>
                             <Link to='/settings'>Settings</Link>
                             <button onClick={() => {

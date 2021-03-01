@@ -43,7 +43,7 @@ const Post = ({ posts, users }) => {
                 if (index !== -1) {
                     editLikesBySlug(slug, { "likes": tmp }).then(res => {
                         setLikes(res?.data?.likes.length)
-                        history.push('/home')
+                        history.push('/blog')
                         window.location.reload()
                     })
                 }
