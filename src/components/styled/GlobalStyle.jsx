@@ -7,15 +7,15 @@ export const GlobalStyle = createGlobalStyle`
       box-sizing: border-box;
   }
   body {
-      font-family: 'B612', sans-serif;
-      color:WHITE;
+    font-family: 'PT Sans Narrow', sans-serif;
+      color:#FFF7EB;
       background-color:#272D2D;
       overflow-x: hidden;
 
   }
   a {
       text-decoration: none;
-      color: WHITE;
+      color: #FFF7EB;
   }
   .container {
     display: flex;

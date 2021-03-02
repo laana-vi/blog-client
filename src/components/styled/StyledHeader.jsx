@@ -31,7 +31,7 @@ nav {
 .nav-links {
     display: flex;
     justify-content: space-around;
-    width: 40%;
+    width: 30%;
     
 }
 .item {
