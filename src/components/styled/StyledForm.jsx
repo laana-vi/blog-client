@@ -66,7 +66,7 @@ align-items: center;
         font-size: 15px;
         font-weight: 700;
     }
-    .password-reset{
+    .additional{
         font-family: 'PT Sans Narrow', sans-serif;
         color: #272D2D;
         padding: 10px 10px 10px 0;

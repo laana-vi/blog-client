@@ -85,7 +85,7 @@ const AdminPost = ({ posts, categories }) => {
                         }
                     }
                     else {
-                        history.push('/blog')
+                        history.push('/home')
                         window.location.reload()
                     }
                     console.log(res)

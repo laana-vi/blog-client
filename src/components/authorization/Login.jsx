@@ -27,7 +27,7 @@ const Login = () => {
                         if (res.status === 200) {
                             localStorage.setItem('access_token', res.data.access)
                             axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token')
-                            history.push('/blog')
+                            history.push('/home')
                             window.location.reload()
                         }
                         else if (res.data.user_name) {
@@ -42,7 +42,7 @@ const Login = () => {
                     })
                 }}>LOG IN</button>
                 <Error error={error} setError={setError} />
-                <Link className="password-reset" to="/password-reset">Forgot your password?</Link>
+                <Link className="additional" to="/password-reset">Forgot your password?</Link>
             </div>
         </StyledForm>
 

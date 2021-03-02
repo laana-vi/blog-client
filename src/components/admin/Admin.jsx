@@ -31,7 +31,7 @@ const Admin = ({ user, categories }) => {
                             <Link to={`/admin/${post.id}`}>{post.title}</Link>
                             <button onClick={() => {
                                 deletePost(post.id)
-                                history.push('/blog')
+                                history.push('/home')
                                 window.location.reload()
                             }}>Delete</button>
                         </div>
@@ -95,7 +95,7 @@ const Admin = ({ user, categories }) => {
                             }
                         }
                         else {
-                            history.push('/blog')
+                            history.push('/home')
                             window.location.reload()
                         }
                         console.log(res)

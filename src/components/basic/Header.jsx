@@ -14,7 +14,7 @@ const Header = ({ user }) => {
                 user ?
                     <nav className='header-container'>
                         <div>
-                            <Link to='/blog' onClick={() => setOpen(!open)}><img className='pic' src='https://res.cloudinary.com/dpj7zvqzs/image/upload/v1614626528/media/posts/logo_tnx6vv.png' alt="" /></Link>
+                            <Link to='/home' onClick={() => setOpen(!open)}><img className='pic' src='https://res.cloudinary.com/dpj7zvqzs/image/upload/v1614626528/media/posts/logo_tnx6vv.png' alt="" /></Link>
                         </div>
                         <ul className="nav-links">
                             <li><Link className="item" to='/admin' onClick={() => setOpen(!open)}>MY POSTS</Link></li>

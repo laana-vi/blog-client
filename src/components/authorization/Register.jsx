@@ -64,5 +64,4 @@ const Register = () => {
         </StyledForm>
     )
 }
-
 export default Register
