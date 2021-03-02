@@ -35,7 +35,6 @@ const PasswordResetConfirm = () => {
                 <Error error={error} setError={setError} />
             </div>
         </StyledForm>
-
     )
 }
 export default PasswordResetConfirm

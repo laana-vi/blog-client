@@ -14,7 +14,7 @@ nav {
     margin-left: 5px;
     margin-right: 5px;
     padding-bottom: 15px;
-    background-color: transparent;
+    background-color: #272D2D;
 
 }
 .pic {
@@ -38,12 +38,18 @@ nav {
     color : #CC883A;
     font-family: 'Staatliches', cursive;
     font-size:  24px;
+    transition: 0.3s;
+}
+.item:hover{
+    color: #A14016;
+    transform: scale(1.1);
 }
 .nav-links:hover{
     cursor: pointer;
 }
 .nav-links li {
     list-style: none;
+    padding: 0 10px 0 10px
 }
 .burger div {
     width: 25px;
@@ -69,7 +75,7 @@ nav {
     display: none;
     cursor: pointer;
 }
-@media screen and (max-width: 760px){
+@media screen and (max-width: 949px){
     
     .nav-links {
         transform: ${({open}) => open ? 'translateX(0)': 'translateX(100%)'};

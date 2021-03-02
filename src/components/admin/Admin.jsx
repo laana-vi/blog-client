@@ -3,6 +3,10 @@ import { Link, useHistory } from "react-router-dom"
 import { usePost } from "../../hooks/usePost"
 import { addPost, deletePost, getAllPosts, parseJwt, slugify, token } from "../../service"
 import Error from "../basic/Error"
+import { StyledAdmin } from "../styled/AdminStyle"
+import { StyledForm } from "../styled/StyledForm"
+import { FaTimes } from "react-icons/fa";
+
 
 const Admin = ({ user, categories }) => {
     const [posts, setPosts] = useState([])
@@ -24,86 +28,87 @@ const Admin = ({ user, categories }) => {
 
     return (
         <>
-            {
-                posts.map(post => {
-                    return (
-                        <div key={post.id}>
-                            <Link to={`/admin/${post.id}`}>{post.title}</Link>
-                            <button onClick={() => {
-                                deletePost(post.id)
-                                history.push('/home')
-                                window.location.reload()
-                            }}>Delete</button>
-                        </div>
-                    )
-                })
-            }
-            <div>
-                <h3>Add new post</h3>
-                <div>
-                    <label>Title: </label>
-                    <input type="text" onChange={(e) => {
+            <StyledAdmin>
+                <div className="posts-wrapper">
+                    {
+                        posts.map(post => {
+                            return (
+                                <div className="post-item" key={post.id}>
+                                    <Link className='post' to={`/admin/${post.id}`}>{post.title}</Link>
+                                    <button className="post-delete-btn" onClick={() => {
+                                        deletePost(post.id).then(res => {
+                                            history.push('/home')
+                                            window.location.reload()
+                                        })
+
+                                    }}><FaTimes/></button>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </StyledAdmin>
+            <StyledForm>
+                <div className='from-wrapper add-post'>
+                    <h3>ADD NEW POST</h3>
+                    <label className="label-item">TITLE: </label>
+                    <input className='input-item' type="text" onChange={(e) => {
                         setTitle(e.target.value)
                         setSlug(slugify(e.target.value))
                     }} />
-                </div>
-                <p>Slug: {slug}</p>
-                <div>
-                    <label>Content: </label>
-                    <textarea id="" cols="50" rows="10" onChange={(e) => {
+                    <label className="label-item populated">SLUG: {slug}</label>
+                    <label className="label-item">CONTENT: </label>
+                    <textarea className="content" id="" rows="15" onChange={(e) => {
                         setContent(e.target.value)
                     }}></textarea>
-                </div>
-                <p>Author: {user}</p>
-                <div>
-                    <label>Category: </label>
-                    <select onChange={(e) => {
+                    <label className="label-item populated">AUTHOR: {user}</label>
+                    <label className="label-item">CATEGORY: </label>
+                    <select className='input-item select' onChange={(e) => {
                         setCategory(e.target.value)
                     }}>
-                        <option defaultValue='-1'>Select Category</option>
-                        {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}
+                        <option className="option-item" defaultValue='-1'>SELECT CATEGORY</option>
+                        {categories.map(category => <option className="option-item" key={category.id} value={category.id}>{category.name.toUpperCase()}</option>)}
                     </select>
-                </div>
-                <div>
-                    <label>Image: </label>
-                    <input type="file" onChange={(e) => {
+                    <label htmlFor="img" className="custom-file-input"></label>
+                    <input type="file" className="img-input" name="uploadfile" id="img" onChange={(e) => {
                         setImage(e.target.files)
                     }} />
+
+                    <button className='button-item' onClick={() => {
+                        let date = new Date()
+                        date = `${date.getFullYear()}-${date.getUTCMonth()}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+                        let formData = new FormData()
+                        formData.append('title', title)
+                        formData.append('content', content)
+                        formData.append('slug', slug)
+                        formData.append('author', author)
+                        formData.append('category', Number(category))
+                        formData.append('image', image[0])
+                        formData.append('timestamp', date)
+
+                        addPost(formData).then(res => {
+                            if (res.status === 400) {
+                                if (res.data.title) {
+                                    setError(res.data.title)
+                                }
+                                else if (res.data.content) {
+                                    setError(res.data.content)
+                                }
+                                else if (res.data.image) {
+                                    setError(res.data.image)
+                                }
+                            }
+                            else {
+                                history.push('/home')
+                                window.location.reload()
+                            }
+                            console.log(res)
+                            console.log(category)
+                        })
+                    }}>ADD POST</button>
+                    <Error error={error} setError={setError} />
                 </div>
-                <button onClick={() => {
-                    let date = new Date()
-                    date = `${date.getFullYear()}-${date.getUTCMonth()}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-                    let formData = new FormData()
-                    formData.append('title', title)
-                    formData.append('content', content)
-                    formData.append('slug', slug)
-                    formData.append('author', author)
-                    formData.append('category', Number(category))
-                    formData.append('image', image[0])
-                    formData.append('timestamp', date)
-                    
-                    addPost(formData).then(res => {
-                        if (res.status === 400) {
-                            if (res.data.title) {
-                                setError(res.data.title)
-                            }
-                            else if (res.data.content) {
-                                setError(res.data.content)
-                            }
-                            else if (res.data.image) {
-                                setError(res.data.image)
-                            }
-                        }
-                        else {
-                            history.push('/home')
-                            window.location.reload()
-                        }
-                        console.log(res)
-                        console.log(category)
-                    })
-                }}>Add post</button>
-                <Error error={error} setError={setError} />
-            </div>
+            </StyledForm>
         </>
     )
 }

@@ -1,7 +1,8 @@
-import { useEffect} from "react"
+import { useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { useRegister } from "../../hooks/useRegister"
 import { deleteUser, editUser, getUserById, parseJwt, token } from "../../service"
+import { StyledForm } from "../styled/StyledForm"
 
 const Settings = () => {
     const [email, setEmail, username, setUsername, firstName, setFirstName, lastName, setLastName, dateOfBirth, setDateOfBirth] = useRegister()
@@ -23,31 +24,36 @@ const Settings = () => {
     }, [userId, setEmail, setUsername, setFirstName, setLastName, setDateOfBirth])
 
     return (
-        <div>
-            <div>
-                <label>Username: </label>
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
-                <label>Email: </label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                <label>First Name: </label>
-                <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
-                <label>Last name: </label>
-                <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-                <label>Date of birth: </label>
-                <input type="date" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)}/>
-                <button onClick={() => {
-                    let obj = {"user_name" : username, "first_name": firstName, "last_name": lastName, "email": email, "date_of_birth": dateOfBirth, "id": userId}
-                    editUser(userId, obj )
-                    .then(res => console.log(res.data, obj))
-                }}>Submit</button>
+        <StyledForm>
+            <div className='from-wrapper'>
+            <h3>UPDATE YOUR ACCOUNT</h3>
+                <label className="label-item">USERNAME: </label>
+                <input className='input-item' type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <label className="label-item">EMAIL: </label>
+                <input className='input-item' type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <label className="label-item">FIRST NAME: </label>
+                <input className='input-item' type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                <label className="label-item">LAST NAME: </label>
+                <input className='input-item' type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                <label className="label-item">DATE OF BIRTH: </label>
+                <input className='input-item' type="date" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} />
+                <button className='button-item' onClick={() => {
+                    let obj = { "user_name": username, "first_name": firstName, "last_name": lastName, "email": email, "date_of_birth": dateOfBirth, "id": userId }
+                    editUser(userId, obj)
+                        .then(res => {
+                            history.push('/home')
+                        })
+                }}>SUBMIT</button>
+                <button className="delete-account" onClick={() => {
+                    deleteUser(userId).then(res => {
+                        history.push('/register')
+                        localStorage.removeItem('access_token')
+                    })
+                }}>DELETE ACCOUNT</button>
             </div>
-            <button onClick={() => {
-                deleteUser(userId).then(res => {
-                    history.push('/register')
-                    localStorage.removeItem('access_token')
-                })
-            }}>Detele Account</button>
-        </div>
+
+        </StyledForm>
+
     )
 }
 export default Settings

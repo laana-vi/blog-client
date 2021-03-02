@@ -7,9 +7,11 @@ export const GlobalStyle = createGlobalStyle`
       box-sizing: border-box;
   }
   body {
-    font-family: 'PT Sans Narrow', sans-serif;
+      font-family: 'Open Sans', sans-serif;
       color:#FFF7EB;
       background-color:#272D2D;
+      background-image: url('https://res.cloudinary.com/dpj7zvqzs/image/upload/v1614691067/media/background_ca9zr0.png');
+      background-attachment: fixed;
       overflow-x: hidden;
 
   }
@@ -29,5 +31,3 @@ export const GlobalStyle = createGlobalStyle`
     align-content: center;
 } 
   `
-
-//font-family: 'Orbitron', sans-serif;
