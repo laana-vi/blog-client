@@ -22,9 +22,9 @@ export const StyledHome = styled.div`
     background-color: #272D2D;
     border-radius: 5px;
     border : none;
-    margin: 10px 10px 30px 10px;
-    padding: 70px 20px 10px 30px;
-    max-width: 900px;
+    margin: 10px 10px 10px 10px;
+    padding: 70px 20px 10px 20px;
+    max-width: 70%;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
     font-size: 15px;
@@ -32,28 +32,66 @@ export const StyledHome = styled.div`
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
 }
 .post-pic {
-    width: 700px;
+    width: 900px;
     background-size: cover;
     padding-bottom: 30px;
 }
 
-@media screen and (max-width: 939px){
+@media screen and (max-width: 1592px){
+    .post-pic {
+        width: 700px;
+        background-size: cover;
+    }
+
+}
+
+@media screen and (max-width: 1166px){
+    .post-pic {
+        width: 600px;
+        background-size: cover;
+    }
+}
+@media screen and (max-width: 1090px){
     .post-pic {
         width: 500px;
         background-size: cover;
     }
 }
-@media screen and (max-width: 625px){
+@media screen and (max-width: 868px){
+    .post-pic {
+        width: 400px;
+        background-size: cover;
+    }
+    .post-item {
+        max-width: 100%;
+    }
+}
+@media screen and (max-width: 724px){
     .post-pic {
         width: 300px;
         background-size: cover;
+    }
+    .post-item {
+        max-width: 100%;
+    }
+}
+@media screen and (max-width: 400px){
+    .post-pic {
+        width: 270px;
+        background-size: cover;
+    }
+    .post-item {
+        max-width: 100%;
     }
 }
 
 @media screen and (max-width: 299px){
     .post-pic {
-        width: 270px;
+        width: 220px;
         background-size: cover;
+    }
+    .post-item {
+        max-width: 100%;
     }
 }
 .title, .author, .content, .likes {

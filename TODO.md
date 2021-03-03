@@ -35,7 +35,6 @@ edit post done( fields, errors, redirecting)
 
 
 paginacija
-svi postovi
 post by slug
 
 
