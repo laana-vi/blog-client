@@ -76,7 +76,6 @@ export const StyledHome = styled.div`
     font-size: 17px;
 }
 
-
 .timestamp {
     align-self: flex-end;
     font-size: 15px;
