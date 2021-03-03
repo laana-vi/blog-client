@@ -2,13 +2,13 @@ import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { editLikesBySlug, getAuthorName, getPostBySlug, getTime, parseJwt, token } from "../../service"
 
-const Post = ({ posts, users }) => {
+const Post = ({ posts, users, user }) => {
     let { slug } = useParams()
     const [post, setPost] = useState()
     const [likes, setLikes] = useState()
     const history = useHistory()
 
-    const userId = parseJwt(token).user_id
+    const userId = parseJwt(token)?.user_id
 
     useEffect(() => {
         let mounted = true
@@ -30,24 +30,30 @@ const Post = ({ posts, users }) => {
             <p>Written by: {getAuthorName(users, post?.author)?.user_name}</p>
             <small>{post && getTime(post?.timestamp)}</small>
             <p>Likes: {likes}</p>
-            <button onClick={() => {
-                editLikesBySlug(slug, { "likes": [...post?.likes, userId] }).then(res => {
-                    setLikes(res?.data?.likes?.length)
-                    console.log(res.data)
-                })
-            }}>Like</button>
-            <button onClick={() => {
-                let index = post.likes.indexOf(userId)
-                let tmp = post.likes
-                tmp.splice(index, 1)
-                if (index !== -1) {
-                    editLikesBySlug(slug, { "likes": tmp }).then(res => {
-                        setLikes(res?.data?.likes.length)
-                        history.push('/home')
-                        window.location.reload()
+
+            {
+                 user &&
+                <>
+                <button onClick={() => {
+                    editLikesBySlug(slug, { "likes": [...post?.likes, userId] }).then(res => {
+                        setLikes(res?.data?.likes?.length)
+                        console.log(res.data)
                     })
-                }
-            }}>Unlike</button>
+                }}>Like</button>
+                <button onClick={() => {
+                    let index = post.likes.indexOf(userId)
+                    let tmp = post.likes
+                    tmp.splice(index, 1)
+                    if (index !== -1) {
+                        editLikesBySlug(slug, { "likes": tmp }).then(res => {
+                            setLikes(res?.data?.likes.length)
+                            history.push('/home')
+                            window.location.reload()
+                        })
+                    }
+                }}>Unlike</button>
+                </>
+            }
         </div>
     )
 }

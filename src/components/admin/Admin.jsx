@@ -10,7 +10,7 @@ import { FaTimes } from "react-icons/fa";
 
 const Admin = ({ user, categories }) => {
     const [posts, setPosts] = useState([])
-    const [title, setTitle, content, setContent, author, setAuthor, category, setCategory, slug, setSlug, image, setImage, likes, setLikes] = usePost()
+    const [title, setTitle, content, setContent, author, category, setCategory, slug, setSlug, image, setImage] = usePost()
     const [error, setError] = useState('')
     const history = useHistory()
 

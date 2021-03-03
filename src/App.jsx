@@ -83,8 +83,8 @@ const App = () => {
                             <PublicRoute exact path="/register" Component={() => <Register />} />
                             <PublicRoute exact path="/password-reset" Component={() => <PasswordReset />} />
                             <PublicRoute exact path="/password-reset-confirm" Component={() => <PasswordResetConfirm />} />
-                            <PublicRoute exact path="/home" Component={() => <Home user={user} posts={select === '-1' ? currentPosts : currentPosts.filter(post => post.category === Number(select))} users={users} categories={categories} setSelect={setSelect} loading={loading} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />} />
-                            <PrivateRoute exact path="/home/:slug" user={user} Component={() => <Post user={user} users={users} />} />
+                            <PublicRoute exact path="/home" Component={() => <Home user={user} posts={select === '-1' ? posts : posts.filter(post => post.category === Number(select))} users={users} categories={categories} setSelect={setSelect} loading={loading} postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />} />
+                            <PublicRoute exact path="/home/:slug" Component={() => <Post user={user} users={users} />} />
                             <PrivateRoute exact path="/admin" user={user} Component={() => <Admin user={user} categories={categories} />} />
                             <PrivateRoute exact path="/admin/:id" user={user} Component={() => <AdminPost categories={categories} />} />
                             <PrivateRoute exact path="/settings" user={user} Component={() => <Settings user={user} />} />
