@@ -1,18 +1,30 @@
 import styled from "styled-components";
 
-export const StyledHome = styled.div`
-.home-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    width: 100%;
+export const StyledPost = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-content: center;
+width: 100%;
+background-color: transparent;
+height: 100%;
+margin-top: 100px;
+box-sizing: border-box;
+flex-wrap: wrap;
+
+.btn-like {
+    border: none;
     background-color: transparent;
-    height: 100%;
-    margin-top: 100px;
-    box-sizing: border-box;
-    flex-wrap: wrap;
+    color: #FFF7EB;
+    padding-left: 30px;
+    display: inline-block;
 }
+.like {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+}
+
 .post-item {
     display: flex;
     flex-direction: column;
@@ -105,29 +117,24 @@ export const StyledHome = styled.div`
 .title, .author, .content, .likes {
     align-self: flex-start;
 }
-.title{
-    padding-bottom: 20px;
+.likes {
     font-size: 20px;
 }
-.title:hover {
-    transform: scale(1.1);
-    color: #A14016;
+.title{
+    padding-bottom: 20px;
+    font-size: 22px;
 }
 .content {
     padding-bottom: 15px;
-    font-size: 17px;
+    font-size: 19px;
 }
 .author{
     padding-bottom: 15px;
-    font-size: 17px;
+    font-size: 18px;
 }
 
 .timestamp {
     align-self: flex-end;
-    font-size: 15px;
-}
-.likes {
-    font-size: 20px;
-    
+    font-size: 17px;
 }
 `

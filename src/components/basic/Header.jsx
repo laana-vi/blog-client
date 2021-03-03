@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom"
 import { NavLink } from 'react-router-dom';
 import { axiosInstance } from "../../service"
 import { StyledHeader } from "../styled/StyledHeader"
-import { FaArrowLeft } from "react-icons/fa";
+import { FaLongArrowAltLeft } from "react-icons/fa";
 
 
 
@@ -53,7 +53,7 @@ const Header = ({ user }) => {
                 onClick={() => {
                     history.goBack();
                 }}
-            ><FaArrowLeft size={25}/></button>
+            ><FaLongArrowAltLeft size={25}/></button>
         </StyledHeader>
     )
 }

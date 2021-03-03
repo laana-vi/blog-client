@@ -1,19 +1,27 @@
-const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+import { StyledPagination } from "../styled/StyledPagination"
+
+const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
     const pageNumbers = []
 
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
         pageNumbers.push(i)
     }
     return (
-        <div>
-            <nav>
-                <ul>
-                    {pageNumbers.map(number => (
-                        <button key={number} onClick={() => paginate(number) }>{number}</button>
-                    ))}
-                </ul>
-            </nav>
-        </div>
+        <StyledPagination currentPage={currentPage}>
+            <div className="pagination">
+                <nav>
+                    <ul>
+                        {pageNumbers.map(number => (
+                            <button className="page" key={number} currentPage={currentPage} onClick={() => {
+                                paginate(number)
+                                window.location.reload()
+                            }}>{number}</button>
+                        ))}
+                    </ul>
+                </nav>
+            </div>
+        </StyledPagination>
+
     )
 }
 

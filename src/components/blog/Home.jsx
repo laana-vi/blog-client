@@ -42,15 +42,15 @@ const Home = ({ posts, users, categories, setSelect, loading, postsPerPage, tota
                         {posts.filter(post => post.content.toLowerCase().includes(search.toLowerCase()) || post.title.toLowerCase().includes(search.toLowerCase()) || getAuthorName(users, post?.author)?.user_name.toLowerCase().includes(search.toLowerCase())).map(post => {
                             return (
                                 <div className="post-item" key={post.id}>
-                                    <div>
+                                    <Link to={`/home/${post.slug}`}>
                                         <img className="post-pic" src={post.image} alt="" />
-                                    </div>
+                                    </Link>
                                     <Link className="title" to={`/home/${post.slug}`}>
                                         <h3>{post.title}</h3>
                                     </Link>
                                     <p className="content">{truncate(post.content)}</p>
                                     <p className="author">Author: {getAuthorName(users, post?.author)?.user_name}</p>
-                                    <p className="likes"><FaHeart/> {post?.likes?.length}</p>
+                                    <p className="likes"><FaHeart size={20}/> {post?.likes?.length}</p>
                                     <small className="timestamp">{getTime(post.timestamp)}</small>
                                 </div>
                             )

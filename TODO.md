@@ -10,7 +10,6 @@ navbar login(username, password, forgot your password, donn  have a profile-sign
        sign up(email, username, first name, last name, date of birth, username)
 
 
-loading component
 
 dokumentacija node i nmp verzija
 
@@ -19,7 +18,6 @@ react-rouer-dom, axios
 
 error handling
 
-loading component
 
 
 register, login, add post, edit post, change password
@@ -35,8 +33,6 @@ edit post done( fields, errors, redirecting)
 
 
 paginacija
-post by slug
-
 
  dokumentacija
 
