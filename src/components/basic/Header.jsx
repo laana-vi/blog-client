@@ -33,9 +33,7 @@ const Header = ({ user }) => {
                     </nav>
                     :
                     <nav className='header-container'>
-                        <div>
-                            <img className='pic' src='https://res.cloudinary.com/dpj7zvqzs/image/upload/v1614626528/media/posts/logo_tnx6vv.png' alt="" />
-                        </div>
+                        <NavLink exact to='/home'><img className='pic' src='https://res.cloudinary.com/dpj7zvqzs/image/upload/v1614626528/media/posts/logo_tnx6vv.png' alt="" /></NavLink>
                         <ul className="nav-links">
                             <li><NavLink activeClassName="navbar__link--active" exact className="item" to="/login" onClick={() => setOpen(!open)}>LOGIN</NavLink></li>
                             <li><NavLink activeClassName="navbar__link--active" exact className="item" to='/register' onClick={() => setOpen(!open)}>REGISTER</NavLink></li>
