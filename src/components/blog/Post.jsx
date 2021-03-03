@@ -42,7 +42,7 @@ const Post = ({ posts, users, user }) => {
                                 window.location.reload()
                                 
                             })
-                        }}><FaLongArrowAltUp size={20} className="icon" /></button>
+                        }}>LIKE</button>
                         <button className="btn-like" onClick={() => {
                             let index = post.likes.indexOf(userId)
                             let tmp = post.likes
@@ -54,7 +54,7 @@ const Post = ({ posts, users, user }) => {
                                     window.location.reload()
                                 })
                             }
-                        }}><FaLongArrowAltDown size={20} className="icon" /></button>
+                        }}>UNLIKE</button>
                     </div>
                 }
             </div>

@@ -17,7 +17,12 @@ flex-wrap: wrap;
     background-color: transparent;
     color: #FFF7EB;
     padding-left: 30px;
+    font-size: 16px;
     display: inline-block;
+}
+.btn-like:hover {
+    transform:scale(1.1);
+    color: #A14016;
 }
 .like {
     display: flex;
@@ -35,7 +40,7 @@ flex-wrap: wrap;
     border-radius: 5px;
     border : none;
     margin: 10px 10px 50px 10px;
-    padding: 70px 20px 10px 20px;
+    padding: 70px 30px 30px 30px;
     max-width: 70%;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
@@ -49,7 +54,7 @@ flex-wrap: wrap;
     padding-bottom: 30px;
 }
 
-@media screen and (max-width: 18002px){
+@media screen and (max-width: 1802px){
     .post-pic {
         width: 900px;
         background-size: cover;
@@ -125,8 +130,11 @@ flex-wrap: wrap;
     font-size: 22px;
 }
 .content {
-    padding-bottom: 15px;
+    padding-bottom: 35px;
     font-size: 19px;
+    line-height:2.0;
+    text-align: justify;
+    
 }
 .author{
     padding-bottom: 15px;
