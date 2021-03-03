@@ -48,7 +48,7 @@ align-items: center;
     .label-item {
         color: #FFF7EB;
         font-weight: 500;
-        font-size: 18px;
+        font-size: 15px;
     }
     .populated {
         padding: 0px 0 15px 0;
@@ -72,7 +72,7 @@ align-items: center;
         padding:5px 10px 5px 10px;
         border-radius: 5px;
         width: fit-content;
-        font-size: 18px;
+        font-size: 15px;
         background-color: transparent;
         font-family: 'Open Sans', sans-serif;
         font-weight: 500;
@@ -88,7 +88,7 @@ align-items: center;
         font-family: 'Open Sans', sans-serif;
         color: #FFF7EB;
         padding: 10px 10px 10px 0;
-        font-size: 18px;
+        font-size: 15px;
         font-weight: 500;
     }
     .additional:hover{
@@ -114,7 +114,7 @@ align-items: center;
     }
     .option-item{
         font-family: 'Open Sans', sans-serif;
-        font-size: 18px;
+        font-size: 15px;
         font-weight: bolder;
     }
     .option-item:hover{
@@ -124,7 +124,7 @@ align-items: center;
     .select{
         font-family: 'Open Sans', sans-serif;
         padding:0px;
-        font-size: 18px;
+        font-size: 15px;
         font-weight: bolder;
         color: #272D2D;
     }
@@ -144,7 +144,7 @@ align-items: center;
     cursor: pointer;
     font-weight: 500;
     font-family: 'Open Sans', sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 500;
     color: #FFF7EB;
     border-radius: 5px;

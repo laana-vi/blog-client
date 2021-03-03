@@ -27,8 +27,7 @@ const App = () => {
     const [select, setSelect] = useState('-1')
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(5)
-    const [loading, setLoading] = useState(false)
-
+    const [loading, setLoading] = useState(true)
 
     let indexOfLastPost = currentPage * postsPerPage
     let indexOfFirstPost = indexOfLastPost - postsPerPage
@@ -43,7 +42,7 @@ const App = () => {
         getAllCategories().then(res => {
             if (mounted) {
                 setCategories(res.data)
-                setLoading(false)
+                 setLoading(false)
             }
         })
         return () => { mounted = false }

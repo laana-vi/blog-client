@@ -31,7 +31,13 @@ add post done(fields, errors, redirect)
 change password done(fields, errors, redirecting)
 edit post done( fields, errors, redirecting)
 
-all posts by one user, sort by timestamp, pagination
+ sort by timestamp
+
+ loading komponenta
+ svi postovi
+ post by slug
+ footer
+ dokumentacija
 
 
 

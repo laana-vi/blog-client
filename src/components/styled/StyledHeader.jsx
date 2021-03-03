@@ -18,7 +18,7 @@ nav {
 
 }
 .pic {
-    width: 150px;
+    width: 170px;
     display: inline;
     margin-top: 10px;
 }
@@ -42,7 +42,6 @@ nav {
 }
 .item:hover{
     color: #A14016;
-    transform: scale(1.1);
 }
 .nav-links:hover{
     cursor: pointer;
@@ -50,6 +49,11 @@ nav {
 .nav-links li {
     list-style: none;
     padding: 0 10px 0 10px
+}
+
+.navbar__link--active {
+    color: #A14016;
+  transition: border-bottom .5s ease-in-out;
 }
 .burger div {
     width: 25px;

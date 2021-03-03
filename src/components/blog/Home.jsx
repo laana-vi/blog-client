@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { getAuthorName, getTime, truncate } from "../../service"
+import Loading from "../basic/Loading"
 import Pagination from "../basic/Pagination"
 
 const Home = ({ posts, users, categories, setSelect, loading, postsPerPage, totalPosts, paginate }) => {
@@ -8,7 +9,7 @@ const Home = ({ posts, users, categories, setSelect, loading, postsPerPage, tota
 
     if (loading) {
         return (
-            <p>Loading...</p>
+            <Loading></Loading>
         )
     }
     else {
