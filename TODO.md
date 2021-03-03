@@ -33,11 +33,11 @@ edit post done( fields, errors, redirecting)
 
  sort by timestamp
 
-filer
+
 paginacija
 svi postovi
 post by slug
-errors
+
 
  dokumentacija
 

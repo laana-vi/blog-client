@@ -40,7 +40,7 @@ const isValidToken = () => {
 isValidToken()
 
 export const truncate = (str) => {
-    return str.split(' ').length > 20 ? str.split(' ').slice(0, 20).join(' ') + '...' : str
+    return str.split(' ').length > 30 ? str.split(' ').slice(0, 30).join(' ') + '...' : str
 }
 
 export const slugify = (str) => {

@@ -98,6 +98,12 @@ nav {
         display: block
     }
 }
+.back-button {
+    border: none;
+    background-color: transparent;
+    color: #FFF7EB;
+    padding-left: 30px;
+}
 
 
 `

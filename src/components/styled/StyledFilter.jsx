@@ -27,7 +27,7 @@ export const StyledFilter = styled.div`
     .select{
         float: right;
         padding:0px;
-        font-size: 18px;
+        font-size: 15px;
         font-weight: 500;
         color: #272D2D;
         font-family: 'Open Sans', sans-serif;

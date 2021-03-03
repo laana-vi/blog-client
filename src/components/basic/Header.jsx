@@ -1,8 +1,11 @@
 import { useState } from "react"
-import { Link, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { NavLink } from 'react-router-dom';
 import { axiosInstance } from "../../service"
 import { StyledHeader } from "../styled/StyledHeader"
+import { FaArrowLeft } from "react-icons/fa";
+
+
 
 const Header = ({ user }) => {
     const history = useHistory()
@@ -13,10 +16,10 @@ const Header = ({ user }) => {
             {
                 user ?
                     <nav className='header-container'>
-                            <NavLink exact to='/home'><img className='pic' src='https://res.cloudinary.com/dpj7zvqzs/image/upload/v1614626528/media/posts/logo_tnx6vv.png' alt="" /></NavLink>
+                        <NavLink exact to='/home'><img className='pic' src='https://res.cloudinary.com/dpj7zvqzs/image/upload/v1614626528/media/posts/logo_tnx6vv.png' alt="" /></NavLink>
                         <ul className="nav-links">
                             <li><NavLink activeClassName="navbar__link--active" exact className="item" to='/admin' onClick={() => setOpen(!open)}>MY POSTS</NavLink></li>
-                            <li><NavLink activeClassName="navbar__link--active" exact  className="item" to='/settings' onClick={() => setOpen(!open)}>SETTINGS</NavLink></li>
+                            <li><NavLink activeClassName="navbar__link--active" exact className="item" to='/settings' onClick={() => setOpen(!open)}>SETTINGS</NavLink></li>
                             <li className="logout-button item" onClick={() => {
                                 localStorage.removeItem('access_token')
                                 axiosInstance.defaults.headers['Authorization'] = null
@@ -45,6 +48,12 @@ const Header = ({ user }) => {
                         </div>
                     </nav>
             }
+
+            <button className='back-button'
+                onClick={() => {
+                    history.goBack();
+                }}
+            ><FaArrowLeft size={25}/></button>
         </StyledHeader>
     )
 }
