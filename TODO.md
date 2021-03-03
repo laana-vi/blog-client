@@ -33,14 +33,13 @@ edit post done( fields, errors, redirecting)
 
  sort by timestamp
 
- loading komponenta
- svi postovi
- post by slug
- footer
+filer
+paginacija
+svi postovi
+post by slug
+errors
+
  dokumentacija
-
-
-
 
 # naslov
 

@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
   * {
       margin: 0px;
       padding: 0px;
-      box-sizing: border-box;
+    
   }
   body {
       font-family: 'Open Sans', sans-serif;
@@ -20,14 +20,18 @@ export const GlobalStyle = createGlobalStyle`
       color: #FFF7EB;
   }
   .container {
+    min-height: 100%;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    align-items: stretch;
+    
   }
 
 .second {
     display: flex;
     flex-direction: column;
     align-content: center;
+    margin-bottom:100px;
+    padding: 15px;
 } 
   `

@@ -1,10 +1,11 @@
-const Error = ({ error, setError }) => {
-    setTimeout(() =>
-        setError(''), 10000)
+import { StyledError } from "../styled/ErrorStyled"
+
+const Error = ({ error }) => {
     return (
-        <div>
-            <p>{error}</p>
-        </div>
+        <StyledError>
+                <p className="error">{error}</p>
+        </StyledError>
+
     )
 }
 
