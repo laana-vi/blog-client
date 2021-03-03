@@ -1,8 +1,13 @@
+import { StyledFooter } from "../styled/StyledFooter"
+
 const Footer = () => {
     return (
-        <footer>
-            <p>FOOTER</p>
-        </footer>
+        <StyledFooter>
+            <footer>
+                <p className="column">&copy; Copyright 2021 BGlogger</p>
+            </footer>
+        </StyledFooter>
+
     )
 }
 
