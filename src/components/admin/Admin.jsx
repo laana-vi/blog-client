@@ -10,7 +10,7 @@ import { FaTimes } from "react-icons/fa";
 
 const Admin = ({ user, categories }) => {
     const [posts, setPosts] = useState([])
-    const [title, setTitle, content, setContent, author, category, setCategory, slug, setSlug, image, setImage] = usePost()
+    const [title, setTitle, content, setContent, author, setAuthor, category, setCategory, slug, setSlug, image, setImage, timestamp, setTimestamp] = usePost()
     const [error, setError] = useState('')
     const history = useHistory()
 
@@ -37,7 +37,7 @@ const Admin = ({ user, categories }) => {
                                     <div className="post-item" key={post.id}>
                                         <Link className='post' to={`/admin/${post.id}`}>
                                             <p>{post.title}</p>
-                                        <small>{getTime(post.timestamp)}</small></Link>
+                                            <small>{getTime(post.timestamp)}</small></Link>
                                         <button className="post-delete-btn" onClick={() => {
                                             deletePost(post.id).then(res => {
                                                 history.push('/home')
@@ -59,7 +59,6 @@ const Admin = ({ user, categories }) => {
                             setTitle(e.target.value.toUpperCase())
                             setSlug(slugify(e.target.value))
                         }} />
-                        <label className="label-item populated">SLUG: {slug}</label>
                         <label className="label-item">CONTENT: </label>
                         <textarea className="content" id="" rows="15" onChange={(e) => {
                             setContent(e.target.value)

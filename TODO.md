@@ -1,63 +1,47 @@
-if user is logged in
-navbar logo
-       home(all posts, sarch by name, author, select by category, pagination),
-       admin(author posts, delete, edit posts, add posts)
-       settings(update username, first and last name, date of birth, password))
-       logout(redirects to not logged in)
+# BG-logger blog app
 
-if user is not logged in
-navbar login(username, password, forgot your password, donn  have a profile-sign up)
-       sign up(email, username, first name, last name, date of birth, username)
+## About
+This is a simple blog app. It features a blog homepage, account settings page, admin page where you can add and edit your posts, login and register page as well as password reset pages. Admin and account settings pages are set to be private.
+
+View live [here](https://bg-logger.netlify.app/)
 
 
+## Basic functionalities:
+- register
+- login and loguot
+- password reset
+- add post
+- edit and delete post
+- view all posts
+- like and unlike a post
+- search post by title, content and author
+- filter posts by selecting a category
 
-dokumentacija node i nmp verzija
+## Dependencies: 
+- Node.js v14.15.1
+- npm version 6.14.8
+
+## Technologies used: 
+- [axios](https://www.npmjs.com/package/axios)
+- [styled components](https://styled-components.com/)
+- [react-router-dom](https://reactrouter.com/web/guides/quick-start)
+- [react-icons](https://react-icons.github.io/react-icons/)
+
+## Downloading and Instalation
+- install Node.js and npm
+- clone the repo `git clone https://github.com/laana-vi/blog-client.git`
+- go into directory client `cd client`
+- run `npm install` to install dependencies
+- run `npm star` to start the app
+
+## TODO
+- sort by timestamp
+- active class in pagination
+- fix buton width
+- add confirmation before deleting
+- put like and unlike into the same button
+- user profile for each user
+- comments
 
 
-react-rouer-dom, axios
 
-error handling
-
-
-
-register, login, add post, edit post, change password
-
-
-register done(fields, errors, redirecting)
-login partially done(fields, errors done, redirecting not done)
-add post done(fields, errors, redirect)
-change password done(fields, errors, redirecting)
-edit post done( fields, errors, redirecting)
-
- sort by timestamp
-
-
-paginacija
-
- dokumentacija
-
-# naslov
-
-## podlaslov
-
-### popodnaslov
-
-1. Element liste
-2. Drugi Element     
-       1. Gnezdo
-3. Treci
-       - Nesto trece
-
-- fdfsdf
-- sdfdsf
-
-[Neki link](ovde ide link)
-
-```
-Ovo formatira samo kao tekst
-```
-```js
-let niz = [2]
-```
-
-![alt text](link slike)

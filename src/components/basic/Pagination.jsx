@@ -12,7 +12,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
                 <nav>
                     <ul>
                         {pageNumbers.map(number => (
-                            <button className="page" key={number} currentPage={currentPage} onClick={() => {
+                            <button className="page" key={number} onClick={() => {
                                 paginate(number)
                                 window.location.reload()
                             }}>{number}</button>

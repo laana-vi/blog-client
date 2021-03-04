@@ -10,7 +10,7 @@ import { FaHeart } from "react-icons/fa";
 
 
 
-const Home = ({ posts, users, categories, setSelect, loading, postsPerPage, totalPosts, paginate }) => {
+const Home = ({ posts, users, categories, setSelect, loading, postsPerPage, totalPosts, paginate, currentPage }) => {
     const [search, setSearch] = useState('')
 
     if (loading) {
@@ -55,7 +55,7 @@ const Home = ({ posts, users, categories, setSelect, loading, postsPerPage, tota
                                 </div>
                             )
                         })}
-                        <Pagination postsPerPage={postsPerPage} totalPosts={totalPosts} paginate={paginate} />
+                        <Pagination postsPerPage={postsPerPage} totalPosts={totalPosts} paginate={paginate} currentPage={currentPage} />
                     </div>
                 </StyledHome>
 
